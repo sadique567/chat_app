@@ -35,7 +35,8 @@ jobs:
         run: flutter pub get
 
       - name: Build release APK
-        run: flutter build apk --release --split-per-abi
+        run: flutter build apk
+        # --release --split-per-abi
 
       - name: Upload release to GitHub
         uses: ncipollo/release-action@v1
