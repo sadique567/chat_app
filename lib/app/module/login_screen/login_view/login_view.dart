@@ -67,8 +67,9 @@ class LoginView extends GetView<LoginController> {
                           obscureText: controller.isVisible.value,
 
                           decoration: InputDecoration(
-                            fillColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                            fillColor: Theme.of(
+                              context,
+                            ).scaffoldBackgroundColor,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -139,7 +140,7 @@ class LoginView extends GetView<LoginController> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.offAndToNamed(AppRoutes.CHAT_SCREEN);
+                        Get.offAndToNamed(AppRoutes.SIGNUP_SCREEN);
                       },
                       child: Text(
                         "Don't have an account? SignUp",

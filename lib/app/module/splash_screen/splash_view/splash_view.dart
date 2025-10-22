@@ -25,7 +25,7 @@ class SplashView extends GetView<SplashController> {
         physics: NeverScrollableScrollPhysics(),
         children: _list,
       ),
-    );
+  );
   }
 }
 

@@ -2,6 +2,8 @@ import 'package:chat_app/app/module/help/binding/help_binding.dart';
 import 'package:chat_app/app/module/help/view/help_view.dart';
 import 'package:chat_app/app/module/login_screen/login_binding/login_bindin.dart';
 import 'package:chat_app/app/module/login_screen/login_view/login_view.dart';
+import 'package:chat_app/app/module/signup_screen/signup_bindding/signup_binding.dart';
+import 'package:chat_app/app/module/signup_screen/signup_view/signup_view.dart';
 import 'package:chat_app/app/module/splash_screen/splash_binding/splash_binding.dart';
 import 'package:chat_app/app/module/splash_screen/splash_view/splash_view.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,11 @@ class AppPages {
       name: _Path.LOGING_SCREEN,
       page: () => LoginView(),
       binding: LoginBindin(),
+    ),
+    GetPage(
+      name: _Path.SIGNUP_SCREEN,
+      page: () => SignupView(),
+      binding: SignupBinding(),
     ),
     GetPage(
       name: _Path.CHAT_SCREEN,
