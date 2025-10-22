@@ -1,6 +1,9 @@
 import 'package:chat_app/app/routes/app_pages.dart';
 import 'package:chat_app/app/services/firebase_auth.dart';
+import 'package:chat_app/app/shared/shared_Pref.dart';
+import 'package:chat_app/app/utils/common_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -70,7 +73,7 @@ class SignupController extends GetxController {
   //   }
   // }
 
-  Future<void> signUp() async {
+  Future<void> signUp(context) async {
     Map body = {
       "fullname": fullNameController.text,
       "username": userName.text,
@@ -79,6 +82,35 @@ class SignupController extends GetxController {
       "referral": refrellcodeNameController.text,
       "password": passwordController.text,
     };
-    Get.offAllNamed(AppRoutes.LOGING_SCREEN);
+
+    await authServices
+        .registeUserEmailPassword(
+          fullNameController.text,
+          emailController.text,
+          passwordController.text,
+        )
+        .then((value) async {
+          if (value == true) {
+            // saving sharedpreference state
+            await SharedPref.saveUserLogedinStatusSF(value);
+            await SharedPref.saveUserEmailSF(emailController.text);
+            await SharedPref.saveUserFullNameSF(fullNameController.text);
+            Get.offAllNamed(AppRoutes.LOGING_SCREEN);
+
+            print("value $value");
+          } else {
+            showSnackbar(context, value, Colors.red);
+          }
+        });
   }
 }
+
+
+/*
+khan1
+khan1@gmail.com
+Reli@123
+
+
+
+*/

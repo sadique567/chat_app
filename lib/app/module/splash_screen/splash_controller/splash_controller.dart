@@ -24,7 +24,7 @@ class SplashController extends GetxController {
     await checkLogin();
     if (isSignedIn) {
       // ✅ Agar user login hai
-      Get.offAllNamed(AppRoutes.CHAT_SCREEN);
+      Get.offAllNamed(AppRoutes.HOME_SCREEN);
     } else {
       // Animate to next page
       pageController.animateToPage(

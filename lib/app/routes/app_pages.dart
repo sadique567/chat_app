@@ -1,7 +1,13 @@
 import 'package:chat_app/app/module/help/binding/help_binding.dart';
 import 'package:chat_app/app/module/help/view/help_view.dart';
+import 'package:chat_app/app/module/home/home_binding.dart';
+import 'package:chat_app/app/module/home/home_view.dart';
 import 'package:chat_app/app/module/login_screen/login_binding/login_bindin.dart';
 import 'package:chat_app/app/module/login_screen/login_view/login_view.dart';
+import 'package:chat_app/app/module/profilePage/profile_binding.dart';
+import 'package:chat_app/app/module/profilePage/profile_view.dart';
+import 'package:chat_app/app/module/search_screen/search_binding.dart';
+import 'package:chat_app/app/module/search_screen/search_view.dart';
 import 'package:chat_app/app/module/signup_screen/signup_bindding/signup_binding.dart';
 import 'package:chat_app/app/module/signup_screen/signup_view/signup_view.dart';
 import 'package:chat_app/app/module/splash_screen/splash_binding/splash_binding.dart';
@@ -29,6 +35,21 @@ class AppPages {
       name: _Path.SIGNUP_SCREEN,
       page: () => SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Path.HOME_SCREEN,
+      page: () => HomeView(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Path.SEARCH_SCREEN,
+      page: () => SearchView(),
+      binding: SearchBinding(),
+    ),
+    GetPage(
+      name: _Path.PROFILE_SCREEN,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
     ),
     GetPage(
       name: _Path.CHAT_SCREEN,

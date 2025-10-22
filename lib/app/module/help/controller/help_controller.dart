@@ -1,3 +1,4 @@
+import 'package:chat_app/app/services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +6,10 @@ class HelpController extends GetxController {
   final RxList<Map<String, dynamic>> messages = <Map<String, dynamic>>[].obs;
   final  textController = TextEditingController();
   final ScrollController scrollController = ScrollController();
+
+
+FirebaseAuthServices authServices = FirebaseAuthServices();
+
 
   void sendMessage() {
     final text = textController.text.trim();

@@ -174,7 +174,7 @@ class SignupView extends GetView<SignupController> {
                     borderRadius: 15,
                     onTap: () {
                       if (_formKeySignUp.currentState!.validate()) {
-                        controller.signUp();
+                        controller.signUp(context);
                         // controller.sendOtp();
                       }
                     },

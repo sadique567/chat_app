@@ -25,3 +25,18 @@ Widget myBackButton(BuildContext context) {
     child: Icon(Icons.arrow_back_ios_new),
   );
 }
+
+void showSnackbar(BuildContext context, message, Color) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message??''),
+      backgroundColor: Color,
+      duration: Duration(seconds: 2),
+      action: SnackBarAction(
+        label: "Ok",
+        onPressed: () {},
+        textColor: Colors.white,
+      ),
+    ),
+  );
+}

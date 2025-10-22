@@ -31,8 +31,8 @@ class HelpView extends GetView<HelpController> {
               SizedBox(width: MediaQuery.of(context).size.width * 0.03),
 
               GestureDetector(
-                onTap: () => EasyLoading.showInfo("Pending"),
-                child: Icon(Icons.video_call),
+                onTap: () => controller.authServices.signout(),
+                child: Icon(Icons.logout),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.03),
             ],
@@ -56,8 +56,9 @@ class HelpView extends GetView<HelpController> {
                   final isUser = msg["isUser"] as bool;
 
                   return Align(
-                    alignment:
-                        isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    alignment: isUser
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       padding: const EdgeInsets.symmetric(
@@ -68,10 +69,9 @@ class HelpView extends GetView<HelpController> {
                         maxWidth: MediaQuery.of(context).size.width * 0.75,
                       ),
                       decoration: BoxDecoration(
-                        color:
-                            isUser
-                                ? Colors.teal.shade400
-                                : Colors.grey.shade200,
+                        color: isUser
+                            ? Colors.teal.shade400
+                            : Colors.grey.shade200,
 
                         borderRadius: BorderRadius.only(
                           topLeft: const Radius.circular(16),
