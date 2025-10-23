@@ -9,13 +9,15 @@ class HelpView extends GetView<HelpController> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HelpController());
+    // final controller = Get.put(HelpController());
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Help & Support Chat",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Obx(
+          () => Text(
+            "${controller.groupName.value}",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -31,8 +33,12 @@ class HelpView extends GetView<HelpController> {
               SizedBox(width: MediaQuery.of(context).size.width * 0.03),
 
               GestureDetector(
-                onTap: () => controller.authServices.signout(),
-                child: Icon(Icons.logout),
+                onTap: () {
+
+                  
+                },
+                // controller.authServices.signout(),
+                child: Icon(Icons.info),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.03),
             ],
@@ -42,6 +48,7 @@ class HelpView extends GetView<HelpController> {
       body: Column(
         children: [
           // 🟦 Chat Messages List
+          // Obx(() => Text("User Name ${controller.groupName.value}")),
           Expanded(
             child: Obx(
               () => ListView.builder(
