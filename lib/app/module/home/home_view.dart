@@ -1,9 +1,9 @@
+import 'package:chat_app/app/model/notification_badge.dart';
 import 'package:chat_app/app/module/home/home_controller.dart';
 import 'package:chat_app/app/routes/app_pages.dart';
 import 'package:chat_app/app/services/database_service.dart';
 import 'package:chat_app/app/utils/common_widget.dart';
 import 'package:chat_app/app/utils/grouptile_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,6 +23,10 @@ class HomeView extends GetView<HomeController> {
               Get.toNamed(AppRoutes.SEARCH_SCREEN);
             },
             icon: Icon(Icons.search, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.notifications, color: Colors.white),
           ),
         ],
       ),
@@ -86,7 +90,43 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
-      body: groupList(context),
+      body: Column(
+        children: [
+          Text("Notification", textAlign: TextAlign.center),
+
+          NotificationBadge(
+            totalNotificat: controller.totalNotificationCounter,
+          ),
+
+          // if notification is not null
+          controller.notificationInfo != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    Text(
+                      "Title : ${controller.notificationInfo!.dataTitle ?? controller.notificationInfo!.title}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "subTitle : ${controller.notificationInfo!.dataBody ?? controller.notificationInfo!.body}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                )
+              : Container(),
+
+          // 👇 FIX HERE
+          Expanded(child: groupList(context)),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           popupDialog(context);
@@ -107,7 +147,7 @@ class HomeView extends GetView<HomeController> {
               return ListView.builder(
                 itemCount: snapshot.data["groups"].length,
                 itemBuilder: (context, index) {
-                  // show most recent group added 
+                  // show most recent group added
                   int reverseIndex = snapshot.data["groups"].length - index - 1;
 
                   return GrouptileWidget(

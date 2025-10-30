@@ -111,6 +111,27 @@ class DatabaseService {
     String groupName,
   ) async {
     DocumentReference userDocumentReference = userCollection.doc(userId);
-    DocumentReference groupDocumentReference = groupsCollection.doc(groupId); //3:24:43
+    DocumentReference groupDocumentReference = groupsCollection.doc(
+      groupId,
+    ); //3:24:43
+
+    DocumentSnapshot documentSnapshot = await userDocumentReference.get();
+    List<dynamic> groups = await documentSnapshot['groups'];
+    // if user have the Group -> then remove them or also in other part re join them
+    if (groups.contains("${groupId}_$groupName")) {
+      await userDocumentReference.update({
+        "groups": FieldValue.arrayRemove(["${groupId}_$groupName"]),
+      });
+      await groupDocumentReference.update({
+        "members": FieldValue.arrayRemove(["${groupId}_$groupName"]),
+      });
+    } else {
+      await userDocumentReference.update({
+        "groups": FieldValue.arrayUnion(["${groupId}_$groupName"]),
+      });
+      await groupDocumentReference.update({
+        "members": FieldValue.arrayUnion(["${groupId}_$groupName"]),
+      });
+    }
   }
 }

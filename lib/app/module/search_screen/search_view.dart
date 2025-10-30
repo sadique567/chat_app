@@ -1,5 +1,7 @@
 import 'package:chat_app/app/module/search_screen/search_controller.dart';
+import 'package:chat_app/app/routes/app_pages.dart';
 import 'package:chat_app/app/services/database_service.dart';
+import 'package:chat_app/app/utils/common_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,6 +91,7 @@ class SearchView extends GetView<SearchControllerGroup> {
                 itemBuilder: (context, index) {
                   final data = controller.searchSnapShot!.docs[index];
                   return groupTile(
+                    context,
                     controller.userName.value,
                     data["groupId"],
                     data["groupName"],
@@ -120,6 +123,7 @@ class SearchView extends GetView<SearchControllerGroup> {
 
   /// 🧩 Group Tile Widget
   Widget groupTile(
+    context,
     String userName,
     String groupId,
     String groupName,
@@ -127,6 +131,7 @@ class SearchView extends GetView<SearchControllerGroup> {
   ) {
     // function to check whether user already Exist
     controller.joinedorNot(userName, groupName, groupId, groupAdmin);
+    // Reliwell Technologies  FLUTTER
 
     return ListTile(
       leading: CircleAvatar(
@@ -142,7 +147,27 @@ class SearchView extends GetView<SearchControllerGroup> {
         "Admin : ${groupAdmin.substring(groupAdmin.indexOf('_') + 1)}",
       ),
       trailing: InkWell(
-        onTap: () {},
+        onTap: () async {
+          await DatabaseService(userId: controller.user!.uid);
+
+          if (controller.isJoined.value) {
+            controller.isJoined.value = !controller.isJoined.value;
+            showSnackbar(context, "Successfully Join the Group", Colors.green);
+            Future.delayed(Duration(seconds: 2), () {
+              Get.toNamed(
+                AppRoutes.CHAT_SCREEN,
+                arguments: {
+                  "userName": userName,
+                  "groupId": groupId,
+                  "groupName": groupName,
+                },
+              );
+            });
+          } else {
+            controller.isJoined.value = !controller.isJoined.value;
+            showSnackbar(context, " Delete the Group $groupName", Colors.red);
+          }
+        },
         child: controller.isJoined.value
             ? Container(
                 padding: EdgeInsets.all(10),
